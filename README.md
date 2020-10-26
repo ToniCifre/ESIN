@@ -1,2 +1,2 @@
-# Estructura_de_la_Informacion
+# Estructura dela InformaciÓn
 Assignatura ESTRUCTURA DE LA INFORMACIÓN de la UPC
