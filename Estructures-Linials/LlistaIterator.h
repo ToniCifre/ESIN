@@ -2,18 +2,17 @@
 // Created by tonix on 19/10/2020.
 //
 
-#ifndef ESIN_LLISTADOBLEENCADENADA_H
-#define ESIN_LLISTADOBLEENCADENADA_H
+#ifndef ESIN_LLISTAITERATOR_H
+#define ESIN_LLISTAITERATOR_H
 
 #include <iostream>
 
 using namespace std;
-
 typedef unsigned int nat;
 
 
 template <typename T>
-class LlistaDobleEncadenada {
+class LlistaIterator {
 private:
     struct node {
         T info;
@@ -25,13 +24,13 @@ private:
 
     node* copiar_llista(node* orig, node* orighead,node* h) throw();
     void destruir_llista(node* p, node* h) throw();
-    void swap(LlistaDobleEncadenada<T>& ) throw();
+    void swap(LlistaIterator<T>& ) throw();
 
 public:
-    LlistaDobleEncadenada();
-    LlistaDobleEncadenada(const LlistaDobleEncadenada<T>& l) throw();
-    LlistaDobleEncadenada<T>& operator=(const LlistaDobleEncadenada<T>& l) throw();
-    ~LlistaDobleEncadenada() throw();
+    LlistaIterator();
+    LlistaIterator(const LlistaIterator<T>& l) throw();
+    LlistaIterator<T>& operator=(const LlistaIterator<T>& l) throw();
+    ~LlistaIterator() throw();
 
     friend class iterador;
     class iterador {
@@ -72,4 +71,4 @@ public:
 };
 
 
-#endif //ESIN_LLISTADOBLEENCADENADA_H
+#endif //ESIN_LLISTAITERATOR_H

@@ -6,13 +6,13 @@
 
 // Cost: (1)
 template <typename T>
-Pila<T>::Pila() throw(error) {
+Pila<T>::Pila() throw() {
     _pl = 0;
 }
 
 // Cost: (n)
 template <typename T>
-void Pila<T>::copiar(const Pila<T> &p) throw(error) {
+void Pila<T>::copiar(const Pila<T> &p) throw() {
     for (int i=0; i < p._pl; ++i) {
         _taula[i] = p._taula[i];
     }
@@ -21,13 +21,13 @@ void Pila<T>::copiar(const Pila<T> &p) throw(error) {
 
 // Cost: (n)
 template <typename T>
-Pila<T>::Pila(const Pila<T> &p) throw(error) {
+Pila<T>::Pila(const Pila<T> &p) throw() {
     copiar(p);
 }
 
 // Cost: (n)
 template <typename T>
-Pila<T>& Pila<T>::operator=(const Pila<T> &p) throw(error)
+Pila<T>& Pila<T>::operator=(const Pila<T> &p) throw()
 {
     if (this != &p) {
         copiar(p);
@@ -43,7 +43,7 @@ Pila<T>::~Pila() throw() {
 
 // Cost: (1)
 template <typename T>
-void Pila<T>::apilar(const T &x) throw(error) {
+void Pila<T>::apilar(const T &x) throw() {
     if (es_plena()) {
         throw PilaPlena;
     }
@@ -53,7 +53,7 @@ void Pila<T>::apilar(const T &x) throw(error) {
 
 // Cost: (1)
 template <typename T>
-void Pila<T>::desapilar() throw(error) {
+void Pila<T>::desapilar() throw() {
     if (es_buida()) {
         throw PilaBuida;
     }
@@ -62,9 +62,9 @@ void Pila<T>::desapilar() throw(error) {
 
 // Cost: (1)
 template <typename T>
-const T& Pila<T>::cim() const throw(error) {
+const T& Pila<T>::cim() const throw() {
     if (es_buida()) {
-        throw error(PilaBuida);
+        throw (PilaBuida);
     }
     return _taula[_pl-1];
 }
@@ -83,7 +83,7 @@ bool Pila<T>::es_plena() const throw() {
 
 // Cost: (n)
 template <typename T>
-Pila<T> Pila<T>::operator&(const T &x) const throw(error) {
+Pila<T> Pila<T>::operator&(const T &x) const throw() {
     Pila<T> p(*this); // constructor per còpia
     p.aPilar(x);
     return p;
@@ -91,7 +91,7 @@ Pila<T> Pila<T>::operator&(const T &x) const throw(error) {
 
 // Cost: (n)
 template <typename T>
-Pila<T> Pila<T>::resta() const throw(error) {
+Pila<T> Pila<T>::resta() const throw() {
     Pila<T> p(*this); // constructor per còpia
     p.desaPilar();
     return p;

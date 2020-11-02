@@ -1,6 +1,7 @@
 //
-// Created by tonix on 13/10/2020.
+// Created by tonix on 22/10/2020.
 //
+
 
 #ifndef _LLISTA_HPP
 #define _LLISTA_HPP
@@ -8,7 +9,6 @@
 #include <cstddef>
 #include <sstream>
 #include <iostream>
-
 using namespace std;
 typedef unsigned int nat;
 
@@ -46,7 +46,16 @@ public:
     void mostra_invertida() const;
     // Pre: True
     // Post: Mostra el p.i. en ordre invers pel canal estàndard de sortida.
+
+    void inverteix();
+    // Pre: True
+    // Post: S’ha invertit l’ordre els elements del p.i.
+    // Exemple: [2 5 3] quedaria [3 5 2]
+    // No es permet usar estructures auxiliars per invertir
+    // els elements ni modificar el camp info,
+    // només modificar els encadenaments dels nodes.
 };
+
 #endif
 
 Llista::Llista() {
@@ -54,6 +63,24 @@ Llista::Llista() {
     _prim -> seg = NULL;
     _long = 0;
 }
+
+Llista::~Llista() {
+    delete(_prim);
+}
+
+nat Llista::longitud() const {
+    return _long;
+}
+void Llista::mostra_invertida() const {
+    node *aux = _prim ->seg;
+    while (aux != _prim){
+        cout<<aux->info<< " ";
+        aux = aux->seg;
+    }
+    cout << endl;
+
+}
+
 
 Llista::Llista(const vector<int> &v) {
     _prim = new node;
@@ -75,25 +102,16 @@ Llista::Llista(const vector<int> &v) {
     aux->seg = _prim;
     _prim->ant = aux;
 }
-
-Llista::~Llista() {
-    delete(_prim);
-}
-
-void Llista::mostra() const {
+void Llista::inverteix() {
     node *aux = _prim;
-    while (aux != NULL){
-        cout<<aux->info<< " ";
-        aux = aux->seg;
-    }
-    cout << endl;
+    do{
+        node *aux1 = aux->seg;
+        aux->seg = aux->ant;
+        aux ->ant = aux1;
+        aux = aux->ant;
 
+    }while(aux != _prim);
 }
-
-nat Llista::longitud() const {
-    return _long;
-}
-
 
 int main() {
     string linea;
@@ -107,7 +125,11 @@ int main() {
         }
 
         Llista l(v);
-        l.mostra();
+        l.mostra_invertida();
+
+        l.inverteix();
+        l.mostra_invertida();
+
 
     }
 

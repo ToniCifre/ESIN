@@ -2,12 +2,12 @@
 // Created by tonix on 19/10/2020.
 //
 
-#include "LlistaDobleEncadenada.h"
+#include "LlistaIterator.h"
 
 
 // Cost: (1)
 template <typename T>
-LlistaDobleEncadenada<T>::LlistaDobleEncadenada() {
+LlistaIterator<T>::LlistaIterator() {
     _head = new node;
     _head->next = _head->prev = _head;
     _sz = 0;
@@ -15,7 +15,7 @@ LlistaDobleEncadenada<T>::LlistaDobleEncadenada() {
 
 // Cost: (n)
 template <typename T>
-LlistaDobleEncadenada<T>::LlistaDobleEncadenada(const LlistaDobleEncadenada<T> &l) throw(){
+LlistaIterator<T>::LlistaIterator(const LlistaIterator<T> &l) throw(){
     _head = new node;
     _head->next = copiar_llista(l._head->next,
                                 l._head, _head);
@@ -25,7 +25,7 @@ LlistaDobleEncadenada<T>::LlistaDobleEncadenada(const LlistaDobleEncadenada<T> &
 
 // Cost: (n)
 template <typename T>
-typename LlistaDobleEncadenada<T>::node*LlistaDobleEncadenada<T>::copiar_llista(node* orig,node* orig_head, node* h) throw() {
+typename LlistaIterator<T>::node*LlistaIterator<T>::copiar_llista(node* orig, node* orig_head, node* h) throw() {
     node* dst = h;
     if (orig != orig_head) {
         dst = new node;
@@ -45,9 +45,9 @@ typename LlistaDobleEncadenada<T>::node*LlistaDobleEncadenada<T>::copiar_llista(
 
 // Cost: (n)
 template <typename T>
-LlistaDobleEncadenada<T>& LlistaDobleEncadenada<T>::operator=(const LlistaDobleEncadenada<T> & l) throw() {
+LlistaIterator<T>& LlistaIterator<T>::operator=(const LlistaIterator<T> & l) throw() {
     if (this != &l) {
-        LlistaDobleEncadenada<T> aux = l;
+        LlistaIterator<T> aux = l;
         swap(aux);
     }
     return *this;
@@ -55,7 +55,7 @@ LlistaDobleEncadenada<T>& LlistaDobleEncadenada<T>::operator=(const LlistaDobleE
 
 // Cost: (1)
 template <typename T>
-void LlistaDobleEncadenada<T>::swap(LlistaDobleEncadenada<T> &l) throw(){
+void LlistaIterator<T>::swap(LlistaIterator<T> &l) throw(){
     node* auxn = _head;
     _head = l._head;
     l._head = auxn;
@@ -66,7 +66,7 @@ void LlistaDobleEncadenada<T>::swap(LlistaDobleEncadenada<T> &l) throw(){
 
 // Cost: (n)
 template <typename T>
-void LlistaDobleEncadenada<T>::destruir_llista(node* p, node* h) throw(){
+void LlistaIterator<T>::destruir_llista(node* p, node* h) throw(){
     if (p != h) {
         destruir_llista(p->next, h);
         delete p;
@@ -75,19 +75,19 @@ void LlistaDobleEncadenada<T>::destruir_llista(node* p, node* h) throw(){
 
 // Cost: (n)
 template <typename T>
-LlistaDobleEncadenada<T>::~LlistaDobleEncadenada() throw(){
+LlistaIterator<T>::~LlistaIterator() throw(){
     destruir_llista(_head->next, _head);
     delete _head;
 }
 
 // Cost: (1)
 template <typename T>
-LlistaDobleEncadenada<T>::iterador::iterador(){
+LlistaIterator<T>::iterador::iterador(){
 }
 
 // Cost: (1)
 template <typename T>
-const T& LlistaDobleEncadenada<T>::iterador::operator*() const
+const T& LlistaIterator<T>::iterador::operator*() const
 throw() {
     if (_p == _h) {
         throw (IteradorIndef);
@@ -97,7 +97,7 @@ throw() {
 
 // Cost: (1)
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador&LlistaDobleEncadenada<T>::iterador::operator++() throw(){
+typename LlistaIterator<T>::iterador&LlistaIterator<T>::iterador::operator++() throw(){
     if (_p != _h) {
         _p = _p->next;
     }
@@ -106,7 +106,7 @@ typename LlistaDobleEncadenada<T>::iterador&LlistaDobleEncadenada<T>::iterador::
 // Cost: (1)
 //Operador postincrement a++
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::iterador::operator++(int) throw() {
+typename LlistaIterator<T>::iterador LlistaIterator<T>::iterador::operator++(int) throw() {
     iterador tmp(*this);
     ++(*this); // es crida al mètode de preincrement
     return tmp;
@@ -115,19 +115,19 @@ typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::iterador::
 
 // Cost: (1)
 template <typename T>
-bool LlistaDobleEncadenada<T>::iterador::operator==(iterador it)const throw() {
+bool LlistaIterator<T>::iterador::operator==(iterador it)const throw() {
     return (_p == it._p) and (_h == it._h);
 }
 
 // Cost: (1)
 template <typename T>
-bool LlistaDobleEncadenada<T>::iterador::operator!=(iterador it)const throw() {
+bool LlistaIterator<T>::iterador::operator!=(iterador it)const throw() {
     return not (*this == it);
 }
 
 // Cost: (1)
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador&LlistaDobleEncadenada<T>::iterador::operator--() throw() {
+typename LlistaIterator<T>::iterador&LlistaIterator<T>::iterador::operator--() throw() {
     if (_p != _h) {
         _p = _p->prev;
     }
@@ -137,7 +137,7 @@ typename LlistaDobleEncadenada<T>::iterador&LlistaDobleEncadenada<T>::iterador::
 // Cost: (1)
 
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::iterador::operator--(int) throw() {
+typename LlistaIterator<T>::iterador LlistaIterator<T>::iterador::operator--(int) throw() {
     iterador tmp(*this);
     --(*this); // es crida al mètode de predecrement
     return tmp;
@@ -145,7 +145,7 @@ typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::iterador::
 
 // Cost: (1)
 template <typename T>
-void LlistaDobleEncadenada<T>::inserir_davant(const T& x, iterador it) throw(){
+void LlistaIterator<T>::inserir_davant(const T& x, iterador it) throw(){
     node* nn = new node;
     // no sabem com és el tipus T. Cap la possibilitat
     // que usi memòria dinàmica i per tant cal comprovar
@@ -164,7 +164,7 @@ void LlistaDobleEncadenada<T>::inserir_davant(const T& x, iterador it) throw(){
 }
 // Cost: (1)
 template <typename T>
-void LlistaDobleEncadenada<T>::inserir_darrera(const T& x, iterador it) throw(){
+void LlistaIterator<T>::inserir_darrera(const T& x, iterador it) throw(){
     node* nn = new node;
     try {
         nn -> info = x;
@@ -181,7 +181,7 @@ void LlistaDobleEncadenada<T>::inserir_darrera(const T& x, iterador it) throw(){
 
 // Cost: (1)
 template <typename T>
-void LlistaDobleEncadenada<T>::esborrar_avnc(iterador& it) throw() {
+void LlistaIterator<T>::esborrar_avnc(iterador& it) throw() {
     if (it._p != _head) {
         node* todel = it._p;
         todel->prev->next = todel->next;
@@ -193,7 +193,7 @@ void LlistaDobleEncadenada<T>::esborrar_avnc(iterador& it) throw() {
 }
 // Cost: (1)
 template <typename T>
-void LlistaDobleEncadenada<T>::esborrar_darr(iterador& it) throw() {
+void LlistaIterator<T>::esborrar_darr(iterador& it) throw() {
     if (it._p != _head) {
         node* todel = it._p;
         todel->prev->next = todel->next;
@@ -205,17 +205,17 @@ void LlistaDobleEncadenada<T>::esborrar_darr(iterador& it) throw() {
 }
 // Cost: (1)
 template <typename T>
-nat LlistaDobleEncadenada<T>::longitud() const throw() {
+nat LlistaIterator<T>::longitud() const throw() {
     return _sz;
 }
 // Cost: (1)
 template <typename T>
-bool LlistaDobleEncadenada<T>::es_buida() const throw() {
+bool LlistaIterator<T>::es_buida() const throw() {
     return _sz == 0;
 }
 // Cost: (1)
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::primer() const throw() {
+typename LlistaIterator<T>::iterador LlistaIterator<T>::primer() const throw() {
     iterador it;
     it._p = _head->next;
     it._h = _head;
@@ -223,7 +223,7 @@ typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::primer() c
 }
 // Cost: (1)
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::ultim() const throw() {
+typename LlistaIterator<T>::iterador LlistaIterator<T>::ultim() const throw() {
     iterador it;
     it._p = _head -> prev;
     it._h = _head;
@@ -231,7 +231,7 @@ typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::ultim() co
 }
 // Cost: (1)
 template <typename T>
-typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::indef() const throw() {
+typename LlistaIterator<T>::iterador LlistaIterator<T>::indef() const throw() {
     iterador it;
     it._p = _head;
     it._h = _head;
@@ -239,7 +239,7 @@ typename LlistaDobleEncadenada<T>::iterador LlistaDobleEncadenada<T>::indef() co
 }
 
 template<typename T>
-void LlistaDobleEncadenada<T>::mostra() const {
+void LlistaIterator<T>::mostra() const {
     iterador i = primer();
     while (i != indef()){
         cout <<*i<<" ";

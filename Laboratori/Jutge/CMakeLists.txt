@@ -3,6 +3,6 @@ project(ESIN)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ESIN X32967.cpp)
+add_executable(ESIN Arbres/X70366/main.cpp Arbres/X70366/solution.cpp)
 
 
