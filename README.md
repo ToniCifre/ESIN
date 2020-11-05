@@ -1,2 +1,2 @@
 # Estructura dela InformaciÓn
-Assignatura ESTRUCTURA DE LA INFORMACIÓN de la UPC
+Assignatura ESTRUCTURA DE LA INFORMACIÓN (ESIN) de la UPC

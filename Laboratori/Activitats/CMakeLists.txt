@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD 11)
 
 include_directories(../../Estructures-Linials)
 
-add_executable(ESIN "Activitat1.cpp")
+add_executable(ESIN "Activitat2- X83764/main.cc" "Activitat2- X83764/Activitat2.cpp")
 
 
