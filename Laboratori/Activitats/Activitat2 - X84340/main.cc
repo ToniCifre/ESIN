@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stack>
-#include "Activitat2.1.cpp"
+#include "Activitat2.cpp"
 template <typename T>
 typename Arbre<T>::node* Arbre<T>::copia_arbre(node* p) {
   node* aux = NULL;
