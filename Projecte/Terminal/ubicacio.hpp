@@ -42,6 +42,6 @@ public:
   static const int UbicacioIncorrecta = 10;
 
 private:
-  #include "Test/ubicacio.rep"
+  #include "ubicacio.rep"
 };
 #endif

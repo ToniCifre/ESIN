@@ -49,7 +49,7 @@ public:
   static const int ClauInexistent = 31;
 
 private:
-  #include "Test/cataleg.rep"
+  #include "cataleg.rep"
 };
 #include "cataleg.t"
 #endif

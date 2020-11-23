@@ -46,6 +46,6 @@ public:
   static const int LongitudIncorrecta = 21;
 
 private:
-  #include "Test/contenidor.rep"
+  #include "contenidor.rep"
 };
 #endif

@@ -127,6 +127,6 @@ public:
   static const int UbicacioNoMagatzem  = 46;
 
 private:
-  #include "Test/terminal.rep"
+  #include "terminal.rep"
 };
 #endif
