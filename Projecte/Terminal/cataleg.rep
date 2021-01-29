@@ -1,0 +1,24 @@
+/* Per a la representació de Cataleg s’ha optat per fer servir una
+taula de dispersió doncs en aquest cas, ja que podem tenir una gran
+quantitat de contenidors es la que millor eficiencia temporal i espacial
+ens pot donar.
+A la representació tambe hi hem afegit la mida de la taula, que correspon
+al nombre maxim de contenidors que poden haver (_M), la quantitat de
+contenidors que hi ha en un moment donat (_quants) i la propia funcio hash.
+Cada node hash conté una clau (_k), el valor corresponent (_v) i un punter
+al següent node (_seg). */
+
+struct node_hash {
+    string _k;
+    Valor _v;
+    node_hash* _seg;
+    node_hash(const string &k, const Valor &v, node_hash* seg = NULL);
+};
+node_hash **_taula;
+nat _M;
+nat _quants;
+util::Hash<string> h;
+
+int hash(const string &k) const;
+
+void auxDestr(const node_hash *n);

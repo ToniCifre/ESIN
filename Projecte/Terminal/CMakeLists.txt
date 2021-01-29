@@ -1,16 +1,15 @@
 cmake_minimum_required(VERSION 3.17)
-project(ESIN)
+
+project(Terminal)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories(${CMAKE_SOURCE_DIR}/incl)
 
-INCLUDE_DIRECTORIES(include)
-LINK_DIRECTORIES(include)
+add_executable(Terminal driver_gestterm.cpp
+        contenidor.cpp contenidor.hpp
+        ubicacio.cpp ubicacio.hpp
+        terminal.cpp terminal.hpp
+        cataleg.hpp)
 
-add_executable(ESIN terminal.cpp)
-
-TARGET_LINK_LIBRARIES(ESIN include/esin/util include/esin/error)
-
-
-
-
+target_link_libraries(Terminal ${CMAKE_SOURCE_DIR}/lib/libesin.so)

@@ -128,5 +128,6 @@ public:
 
 private:
   #include "terminal.rep"
+
 };
 #endif

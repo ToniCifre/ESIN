@@ -1,0 +1,10 @@
+/* Per a la representació de la classe contenidor només cal
+emmagatzemar la seva matricula i la longitud. L’enunciat requereix
+que la matricula sigui del tipus string i per a la longitud s’ha optat
+per usar un nat ja que aquesta mai sera < 0.*/
+
+string _m;
+nat _l;
+
+static bool _valida_matricula(const string& m) ;
+static bool _valida_longitud(const nat &l) ;

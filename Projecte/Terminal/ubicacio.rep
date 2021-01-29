@@ -1,0 +1,7 @@
+/* En el cas de la classe Ubicació només cal emmagatzemar la
+terna <i ,j, k> que corresponen a la filera, plaça i pis, cadascuna en una
+variable del tipus int. Aquesta representació es prou sencilla i no afecta en
+quan a eficiencia espacial i temporal ja que qualsevol consulta o modificació
+que es vulgui fer sera inmediata i tindra cost constant (O(1)). */
+
+int _fil, _pla, _pis;

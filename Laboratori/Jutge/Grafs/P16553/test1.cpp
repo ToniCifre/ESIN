@@ -12,11 +12,6 @@ using namespace std;
 typedef vector< vector<int> > GrafP;
 
 
-int const INFINITY = numeric_limits<int>::max();
-
-
-
-
 void leer_tripletes(GrafP &G, int m) {
     int x, y;
     for (int i = 0; i < m; i++) {
@@ -24,7 +19,6 @@ void leer_tripletes(GrafP &G, int m) {
         G[x].push_back(y);
     }
 }
-
 
 bool is_in(vector< int > cami, int c){
     for(auto &p : cami){
@@ -51,18 +45,15 @@ void DFSI(const GrafP &g, vector< int > &cami, int i) {
     }
 }
 
-void BFS(const GrafP &g, vector< int > &cami, int i) {
-    vector<int> aux(g[i].size());
+void BFS(const GrafP &g, vector< int > &cami, queue< int > &cua,  int i) {
     for(auto &n : g[i]) {
         if(!is_in(cami, n)){
             cami.push_back(n);
-            aux.push_back(n);
+            cua.push(n);
         }
     }
-    for(auto &n : aux) {
-        DFS(g, cami, n);
-    }
 }
+
 
 int main() {
     int n;
@@ -81,16 +72,28 @@ int main() {
 
         vector< int > cami3;
         cami3.push_back(0);
-        BFS(G, cami3, 0);
+        queue<int> cua;
+        BFS(G, cami3, cua,0);
+        while (!cua.empty()){
+            int p = cua.front();
+            cout << p<< endl;
+            cua.pop();
+            BFS(G, cami3, cua, p);
+        }
 
+        cout << "DFS"<< endl;
         for(auto & p : cami) {
             cout << p << " ";
         }
         cout << endl;
+
+        cout << "DFS Iter"<< endl;
         for(auto & p : cami2) {
             cout << p << " ";
         }
         cout << endl;
+
+        cout << "BFS"<< endl;
         for(auto & p : cami3) {
             cout << p << " ";
         }
@@ -98,3 +101,6 @@ int main() {
 
     }
 }
+
+//7 9
+//0 2  0 3  0 4  3 2  3 4  2 1  4 1  4 5  1 6

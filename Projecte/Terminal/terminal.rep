@@ -1,0 +1,56 @@
+/*
+La representació de la terminal hem optat en una estructura dedicada a
+l'optimització del temps d'execució. Per aconseguir aquest objectiu hem
+decidit introduir una taula tridimensional al qual representa l'estructura
+completa de la terminal (_taula). Gràcies a n'aquesta taula hem pogut
+optimitzar la cerca d'espais buits i d'aquesta manera la inserció de
+contenidors, l'eliminació i finalment la localització d'un contenidor a
+partir d'una ubicació.
+
+També hem creat una taula bidimensional on es guarden els espais buits
+amb els peus disponibles, d'aquesta manera a l'hora d'inserir un contenidor,
+podem obtenir una ubicació pel nou contenidor de forma ràpida depenent de
+l'estratègia escollida.
+
+Per últim, disposem de dos catàlegs, un on es guardaran les ubicacions a
+partir de la matrícula del contenidor que estan dintre de la terminal i un
+altre per a representar l'àrea d'espera utilitzarem un altre catàleg que
+guardarà aquest contenidor fins a ser cridat.
+En aquest últim catàleg, utilitzarem una llista que representarà les matrícules
+de la llista d'espera per a poder mantenir l'ordre d'inserció dintre d'aquest i
+agilitzar la seva inserció dintre del terminal.
+*/
+
+nat _n;
+nat _m;
+nat _h;
+
+nat _ops;
+estrategia _estr;
+
+struct node {
+    nat _peus;
+    ubicacio _ubi;
+    node* _seg;
+    node(const nat &peus, const ubicacio &ubi, node* seg = NULL);
+};
+node **_taula_forats;
+
+contenidor ****_taula;
+
+cataleg<ubicacio> _cataleg_ubicats;
+cataleg<contenidor> _area_espera;
+
+list<string> _m_espera;
+
+
+bool _insereix_contenidor(const contenidor &c) throw(error);
+
+void _cerca_millor_ubicacio(ubicacio &u, const nat peus);
+void _cerca_primera_ubicacio(ubicacio &u, const nat peus);
+
+void _retira_contenidor(const ubicacio &u, list<string> &l);
+
+void cercar_forats(const nat i);
+
+void _elimina_espera(const string &m);

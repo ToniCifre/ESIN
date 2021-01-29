@@ -1,58 +1,55 @@
 //
 // Created by tonix on 17/11/2020.
 //
-#include "llista.hpp"
-void Llista::fusiona_suma(Llista &l2, nat n) {
-    // El const en funció de l1 i l2 es la suma del tamany de les dues llistes per 2 en els pitjors dels casos
-    // es a dir, (l2.size + l2.size) * 2
-    // Cost = 2n
 
-    node *x1 = _prim;
-    node *x2 = l2._prim->seg;
-    l2._prim->seg = NULL;
-    l2._long = 1;
-    int sum = 0;
+#include "vector"
+using namespace std;
+typedef unsigned int nat;
 
-    while (x1 != NULL) {
-        for (int i = 0; i < n; ++i) {
-            if(x1->seg != NULL) {
-                x1 = x1->seg;
-            }
+class graf {
+    // Graf dirigit i no etiquetat.
+    // Les arestes es guarden en llistes d’adjacència (vector amb els successors).
+public:
+    // Constructora per defecte. Crea un graf buit.
+    graf();
+
+    // Destructora
+    ~graf();
+
+    // Llegeix les dades del graf del canal d’entrada
+    void llegeix();
+
+    bool hi_ha_cami(nat ini, nat fi) const;
+    // Pre: ini i fi són vèrtexs del graf (són menors que n)
+    // Post: Retorna un booleà indicant si hi ha camí per anar d’ini a fi
+
+private:
+    nat n; // Nombre de vèrtexs
+    nat m; // Nombre d’arestes
+    vector<vector<nat> > a; // Vectors amb els successors de cada vèrtex
+
+//    bool is_in(const vector< nat >& cami, nat c) const;
+    bool DFS(const vector<vector<nat> > &g, vector< bool > &cami, nat ini, nat fi) const;
+};
+
+
+bool graf::DFS(const vector<vector<nat> > &g, vector< bool > &cami, nat ini, nat fi) const {
+    //Cost = n+m
+    for(auto &t : g[ini]) {
+        if(t == fi) return true;
+        if(!cami[t]){
+            cami[t] = true;
+            if(DFS(g, cami, t, fi))return true;
+            cami[t] = false;
         }
-        if(x1->seg == NULL) {
-            break;
-        }else{
-            for (int i = 0; i < n; ++i) {
-                if(x2 != NULL) {
-                    node *aux = x2->seg;
-                    x2->seg = x1->seg;
-                    x1->seg = x2;
-
-                    x1 = x1->seg;
-                    x2 = aux;
-                    ++_long;
-                }
-            }
-        }
     }
-
-    while (x2 != NULL) {
-        node *aux = x2->seg;
-        x2->seg = x1->seg;
-        x1->seg = x2;
-
-        x1 = x1->seg;
-        x2 = aux;
-        ++_long;
-    }
-    x1 = _prim->seg;
-    while (x1 != NULL) {
-        sum = sum + x1->info;
-        x1 = x1->seg;
-    }
-    node *p = new node();
-    p->seg = _prim->seg;
-    p->info = sum;
-    _prim->seg = p;
-
+    return false;
 }
+
+bool graf::hi_ha_cami(nat ini, nat fi) const{
+    //Cost = n+m
+    if(ini == fi) return true;
+    vector< bool > cami(n,false);
+    cami[ini] = true;
+    return DFS(a, cami, ini, fi);
+};

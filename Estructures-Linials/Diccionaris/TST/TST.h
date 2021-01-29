@@ -92,22 +92,7 @@ void diccDigital<Simbol, Clau, Valor>::consulta (const Clau &k, bool &hi_es,Valo
 template <class Simbol, class Clau, class Valor>
 typename diccDigital<Simbol, Clau, Valor>::node*
 diccDigital<Simbol, Clau, Valor>::rconsulta (node *n, nat i, const Clau &k) throw() {
-    node *res = NULL;
-    if (n != NULL) {
-        if (i == k.length() and n->_c == '#') { // especial<Clau>()
-            res = n;
-        }
-        else if (n->_c > k[i]) {
-            res = rconsulta(n->_esq, i, k);
-        }
-        else if (n->_c < k[i]) {
-            res = rconsulta(n->_dret, i, k);
-        }
-        else if (n->_c == k[i]) {
-            res = rconsulta(n->_cen, i+1, k);
-        }
-    }
-    return res;
+
 }
 
 // Cost: (k.longitud() * log(#símbols))

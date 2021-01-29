@@ -3,9 +3,6 @@ project(ESIN)
 
 set(CMAKE_CXX_STANDARD 11)
 
-
-#include_directories(../../Estructures-Linials)
-
 add_executable(ESIN Activitat3-X35140/main.cpp Activitat3-X35140/solution.cpp )
 
 
